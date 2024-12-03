@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/login', 'admin.pages.login');
+Route::view('/register', 'admin.pages.register');
+Route::view('/dashboard', 'admin.page-example');
