@@ -21,8 +21,10 @@ use App\Http\Controllers\AdminController;
 
 Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-        Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+        Route::middleware('admin')->group(function () {
+            Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+            Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+        });
     });
     Route::middleware('guest')->group(function () {
         Route::get('/login', [AuthController::class, 'login'])->name('admin.login');
