@@ -58,6 +58,12 @@
                                 <p>Inactive Page</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.logout') }}" class="nav-link">
+                                <i class=" fas fa-sign-out-alt nav-icon"></i>
+                                <p>Log Out</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
