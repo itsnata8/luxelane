@@ -1,5 +1,5 @@
 @extends('admin.layouts.page-layout')
 
 @section('content')
-    -- dashboard example --
+    -- admin list example --
 @endsection

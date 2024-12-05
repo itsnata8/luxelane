@@ -23,6 +23,8 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::middleware('admin')->group(function () {
             Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+            Route::get('/admin-list', [AdminController::class, 'adminList'])->name('admin.admin-list');
+            Route::get('/product', [AdminController::class, 'product'])->name('admin.product');
             Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
         });
     });
