@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\DashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +25,9 @@ use App\Http\Controllers\AdminController;
 Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::middleware('admin')->group(function () {
-            Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-            Route::get('/admin-list', [AdminController::class, 'adminList'])->name('admin.admin-list');
-            Route::get('/product', [AdminController::class, 'product'])->name('admin.product');
+            Route::resource('dashboard', DashboardController::class);
+            Route::resource('admin', AdminController::class);
+            Route::resource('products', ProductController::class);
             Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
         });
     });

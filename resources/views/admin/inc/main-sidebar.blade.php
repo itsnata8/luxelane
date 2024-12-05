@@ -17,8 +17,8 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item ">
-                    <a href="{{ route('admin.dashboard') }}"
-                        class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.index') }}"
+                        class="nav-link {{ Request::segment(2) === 'dashboard' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -26,8 +26,8 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="{{ route('admin.admin-list') }}"
-                        class="nav-link {{ Route::is('admin.admin-list') ? 'active' : '' }}">
+                    <a href="{{ route('admin.index') }}"
+                        class="nav-link {{ Request::segment(2) === 'admin' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-id-badge"></i>
                         <p>
                             Admin
@@ -35,8 +35,8 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="{{ route('admin.product') }}"
-                        class="nav-link {{ Route::is('admin.product') ? 'active' : '' }}">
+                    <a href="{{ route('products.index') }}"
+                        class="nav-link {{ Request::segment(2) === 'products' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>
                             Product
