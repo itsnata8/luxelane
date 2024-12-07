@@ -14,7 +14,7 @@ class AuthController extends Controller
             'pageTitle' => 'Admin | Login'
         ];
 
-        return view('admin.pages.login', $data);
+        return view('admin.pages.auth.login', $data);
     }
     public function handleLogin(Request $request)
     {
@@ -27,7 +27,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             // not verified email yet
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('dashboard.index');
         }
         return redirect()->back()->with('error', $creds);
     }

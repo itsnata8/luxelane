@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $data = [
             'pageTitle' => 'Admin | Dashboard'
         ];
-        return view('admin.pages.dashboard', $data);
+        return view('admin.pages.dashboard.dashboard', $data);
     }
 
     /**

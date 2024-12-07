@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
+        'is_active',
+        'is_delete',
     ];
 
     /**
@@ -42,4 +45,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    static function getAllAdmins()
+    {
+        return User::where('is_admin', 1)->where('is_delete', 0)->get();
+    }
+    static function getAdminById($id)
+    {
+        return User::where('id', $id)->where('is_admin', 1)->first();
+    }
 }
