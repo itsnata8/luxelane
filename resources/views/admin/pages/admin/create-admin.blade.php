@@ -38,7 +38,7 @@
                                     <label for="exampleInputEmail1">Name</label>
                                     <input type="text"
                                         class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name"
-                                        id="exampleInputEmail1" placeholder="Enter name">
+                                        id="exampleInputEmail1" placeholder="Enter name" value="{{ old('name') }}">
                                 </div>
                                 @error('name')
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
@@ -49,7 +49,7 @@
                                     <label for="exampleInputEmail1">Email address</label>
                                     <input type="email"
                                         class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email"
-                                        id="exampleInputEmail1" placeholder="Enter email">
+                                        id="exampleInputEmail1" placeholder="Enter email" value="{{ old('email') }}">
                                 </div>
                                 @error('email')
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
@@ -60,7 +60,8 @@
                                     <label for="exampleInputPassword1">Password</label>
                                     <input type="password"
                                         class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
-                                        name="password" id="exampleInputPassword1" placeholder="Password">
+                                        name="password" id="exampleInputPassword1" placeholder="Password"
+                                        value="{{ old('password') }}">
                                 </div>
                                 @error('password')
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
