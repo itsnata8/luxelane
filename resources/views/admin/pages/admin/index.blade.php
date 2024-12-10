@@ -53,7 +53,7 @@
                                                     href="{{ route('admin.edit', $admin->id) }}">Edit</a> |
                                                 <form action="{{ route('admin.destroy', $admin->id) }}" method="post"
                                                     class="d-inline"
-                                                    onsubmit="return confirm('Are you sure you want to submit this form?');">
+                                                    onsubmit="return confirm('Are you sure want to delete this admin?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"

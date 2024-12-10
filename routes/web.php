@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 
@@ -28,6 +29,7 @@ Route::prefix('admin')->group(function () {
             Route::resource('dashboard', DashboardController::class);
             Route::resource('admin', AdminController::class);
             Route::resource('products', ProductController::class);
+            Route::resource('categories', CategoryController::class);
             Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
         });
     });

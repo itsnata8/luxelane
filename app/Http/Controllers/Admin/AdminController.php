@@ -18,7 +18,7 @@ class AdminController extends Controller
             'pageTitle' => 'Admin | Admin List',
             'admins' => User::getAllAdmins()
         ];
-        return view('admin.pages.admin.admin-list', $data);
+        return view('admin.pages.admin.index', $data);
     }
 
     /**
@@ -30,7 +30,7 @@ class AdminController extends Controller
         $data = [
             'pageTitle' => 'Admin | Create Admin'
         ];
-        return view('admin.pages.admin.create-admin', $data);
+        return view('admin.pages.admin.create', $data);
     }
 
     /**
@@ -77,7 +77,7 @@ class AdminController extends Controller
             'pageTitle' => 'Admin | Edit Admin',
             'admin' => User::getAdminById($id)
         ];
-        return view('admin.pages.admin.edit-admin', $data);
+        return view('admin.pages.admin.edit', $data);
     }
 
     /**

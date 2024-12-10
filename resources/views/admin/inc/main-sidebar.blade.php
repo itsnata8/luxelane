@@ -50,6 +50,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a href="{{ route('categories.index') }}"
+                        class="nav-link {{ Request::segment(2) === 'categories' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-list-alt"></i>
+                        <p>
+                            Category
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.logout') }}" class="nav-link">
                         <i class=" fas fa-sign-out-alt nav-icon"></i>
