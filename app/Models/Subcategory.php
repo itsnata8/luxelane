@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Subcategory extends Model
 {
     use HasFactory;
     protected $fillable = [
         'name',
+        'category_id',
         'slug',
         'meta_title',
         'meta_description',
@@ -20,21 +20,16 @@ class Category extends Model
         'is_delete',
     ];
 
-    public function getAllCategories()
+    public function getAllSubcategories()
     {
-        $data = Category::where('is_delete', 0)->get();
-        return $data;
+        return Subcategory::where('is_delete', 0)->orderBy('id', 'desc')->get();
     }
-    public function getCategoryById($id)
+    public function category()
     {
-        return Category::find($id);
+        return $this->belongsTo(Category::class, 'category_id');
     }
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by');
-    }
-    public function subcategories()
-    {
-        return $this->hasMany(Subcategory::class, 'category_id');
     }
 }

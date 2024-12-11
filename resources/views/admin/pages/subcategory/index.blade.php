@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Category</h1>
+                    <h1>Sub Category</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Category</li>
+                        <li class="breadcrumb-item active">Sub Category</li>
                     </ol>
                 </div>
             </div>
@@ -24,11 +24,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Category List
+                                Sub Category List
                             </h3>
-                            <div class=" text-right"><a href="{{ route('categories.create') }}"
+                            <div class=" text-right"><a href="{{ route('subcategories.create') }}"
                                     class="btn-sm btn-primary"><i class="fas fa-plus-square mr-1"></i> Add New
-                                    Category</a></div>
+                                    Sub Category</a></div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
@@ -36,7 +36,8 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">No</th>
-                                        <th>Name</th>
+                                        <th>Category Name</th>
+                                        <th>Sub Category Name</th>
                                         <th>Slug</th>
                                         <th>Meta Title</th>
                                         <th>Meta Description</th>
@@ -48,22 +49,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $category)
+                                    @foreach ($subcategories as $subcategory)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $category->slug }}</td>
-                                            <td>{{ $category->meta_title }}</td>
-                                            <td>{{ $category->meta_description }}</td>
-                                            <td>{{ $category->meta_keywords }}</td>
-                                            <td>{{ $category->created_by }}</td>
-                                            <td>{{ $category->status == 1 ? 'Active' : 'Inactive' }}</td>
-                                            <td>{{ date('d-m-Y', strtotime($category->created_at)) }}</td>
+                                            <td>{{ $subcategory->category_id }}</td>
+                                            <td>{{ $subcategory->name }}</td>
+                                            <td>{{ $subcategory->slug }}</td>
+                                            <td>{{ $subcategory->meta_title }}</td>
+                                            <td>{{ $subcategory->meta_description }}</td>
+                                            <td>{{ $subcategory->meta_keywords }}</td>
+                                            <td>{{ $subcategory->created_by }}</td>
+                                            <td>{{ $subcategory->status == 1 ? 'Active' : 'Inactive' }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($subcategory->created_at)) }}</td>
                                             <td><a class="btn btn-link text-primary admin-edit-btn"
-                                                    href="{{ route('categories.edit', $category->id) }}">Edit</a>
-                                                <form action="{{ route('categories.destroy', $category->id) }}"
+                                                    href="{{ route('subcategories.edit', $subcategory->id) }}">Edit</a>
+                                                <form action="{{ route('subcategories.destroy', $subcategory->id) }}"
                                                     method="post" class="d-inline"
-                                                    onsubmit="return confirm('Are you sure want to delete this category?');">
+                                                    onsubmit="return confirm('Are you sure want to delete this sub category?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"

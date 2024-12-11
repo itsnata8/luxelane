@@ -117,12 +117,17 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $category = new Category();
-        $deleteCategory = $category->where('id', $id)->update(['is_delete' => 1]);
-        if ($deleteCategory) {
-            return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        $category = Category::find($id);
+        $hasSubcategory = $category->subcategories()->where('category_id', $id)->count();
+        if ($hasSubcategory > 0) {
+            return redirect()->route('categories.index')->with('error', 'Category has subcategories. Please delete subcategories first.');
         } else {
-            return redirect()->route('categories.index')->with('error', 'Something went wrong. Please try again.');
+            $deleteCategory = $category->update(['is_delete' => 1]);
+            if ($deleteCategory) {
+                return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+            } else {
+                return redirect()->route('categories.index')->with('error', 'Something went wrong. Please try again.');
+            }
         }
     }
 }

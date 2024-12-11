@@ -50,7 +50,7 @@
                                             <td>{{ $admin->email }}</td>
                                             <td>{{ $admin->is_active ? 'Active' : 'Inactive' }}</td>
                                             <td><a class="btn btn-link text-primary admin-edit-btn"
-                                                    href="{{ route('admin.edit', $admin->id) }}">Edit</a> |
+                                                    href="{{ route('admin.edit', $admin->id) }}">Edit</a>
                                                 <form action="{{ route('admin.destroy', $admin->id) }}" method="post"
                                                     class="d-inline"
                                                     onsubmit="return confirm('Are you sure want to delete this admin?');">

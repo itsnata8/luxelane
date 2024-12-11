@@ -5,15 +5,15 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <a href="{{ route('categories.index') }}" class="d-flex align-items-center"> <i
+                    <a href="{{ route('subcategories.index') }}" class="d-flex align-items-center"> <i
                             class="fas fa-long-arrow-alt-left mr-2 text-xs"></i>
-                        Back to Category List
+                        Back to Sub Category List
                     </a>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('categories.index') }}">Category</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('categories.index') }}">Sub Category</a></li>
                         <li class="breadcrumb-item active">New</li>
                     </ol>
                 </div>
@@ -26,19 +26,34 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add New Category</h3>
+                            <h3 class="card-title">Add New Sub Category</h3>
                         </div>
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form method="post" action="{{ route('categories.store') }}">
+                        <form method="post" action="{{ route('subcategories.store') }}">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Category Name <span class="text-danger">*</span></label>
+                                    <label for="category_id">Category Name <span class="text-danger">*</span></label>
+                                    <select class="custom-select {{ $errors->has('category_id') ? 'is-invalid' : '' }}"
+                                        id="category_id" name="category_id">
+                                        <option value="" disabled selected>Select category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('category_id')
+                                    <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                                <div class="form-group">
+                                    <label for="name">Sub Category Name <span class="text-danger">*</span></label>
                                     <input type="text"
                                         class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name"
-                                        id="name" placeholder="Enter category name" value="{{ old('name') }}">
+                                        id="name" placeholder="Enter sub category name" value="{{ old('name') }}">
                                 </div>
                                 @error('name')
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">

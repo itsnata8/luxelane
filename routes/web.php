@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SubcategoryController;
 
 
 /*
@@ -30,6 +31,7 @@ Route::prefix('admin')->group(function () {
             Route::resource('admin', AdminController::class);
             Route::resource('products', ProductController::class);
             Route::resource('categories', CategoryController::class);
+            Route::resource('subcategories', SubcategoryController::class);
             Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
         });
     });
