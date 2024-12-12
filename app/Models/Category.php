@@ -22,7 +22,7 @@ class Category extends Model
 
     public function getAllCategories()
     {
-        $data = Category::where('is_delete', 0)->get();
+        $data = Category::where('is_delete', 0)->paginate(10);
         return $data;
     }
     public function getCategoryById($id)

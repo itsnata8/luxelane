@@ -22,7 +22,7 @@ class Subcategory extends Model
 
     public function getAllSubcategories()
     {
-        return Subcategory::where('is_delete', 0)->orderBy('id', 'desc')->get();
+        return Subcategory::where('is_delete', 0)->orderBy('id', 'desc')->paginate(10);
     }
     public function category()
     {

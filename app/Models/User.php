@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     static function getAllAdmins()
     {
-        return User::where('is_admin', 1)->where('is_delete', 0)->get();
+        return User::where('is_admin', 1)->where('is_delete', 0)->paginate(10);
     }
     static function getAdminById($id)
     {
