@@ -42,15 +42,6 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="{{ route('products.index') }}"
-                        class="nav-link {{ Request::segment(2) === 'products' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-shopping-cart"></i>
-                        <p>
-                            Product
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item ">
                     <a href="{{ route('categories.index') }}"
                         class="nav-link {{ Request::segment(2) === 'categories' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-list-alt"></i>
@@ -65,6 +56,24 @@
                         <i class="nav-icon fas fa-list-alt"></i>
                         <p>
                             Sub Category
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{ route('products.index') }}"
+                        class="nav-link {{ Request::segment(2) === 'products' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-shopping-cart"></i>
+                        <p>
+                            Product
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{ route('brands.index') }}"
+                        class="nav-link {{ Request::segment(2) === 'brands' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tag"></i>
+                        <p>
+                            Brand
                         </p>
                     </a>
                 </li>

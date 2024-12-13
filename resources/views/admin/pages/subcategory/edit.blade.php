@@ -65,7 +65,7 @@
                                 @enderror
                                 <div class="form-group">
                                     <label for="slug">Slug <span class="text-danger">*</span></label>
-                                    <input type="slug"
+                                    <input type="text"
                                         class="form-control {{ $errors->has('slug') ? 'is-invalid' : '' }}" name="slug"
                                         id="slug" placeholder="Slug Ex. URL" value="{{ $subcategory->slug }}">
                                 </div>

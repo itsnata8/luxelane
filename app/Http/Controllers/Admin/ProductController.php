@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Product;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -15,7 +18,7 @@ class ProductController extends Controller
         $data = [
             'pageTitle' => 'Admin | Products'
         ];
-        return view('admin.pages.product', $data);
+        return view('admin.pages.product.index', $data);
     }
 
     /**
@@ -23,7 +26,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'pageTitle' => 'Admin | Create Product'
+        ];
+        return view('admin.pages.product.create', $data);
     }
 
     /**
@@ -31,7 +37,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $title = trim($request->title);
+        $product = new Product();
+        $product->title = $title;
+        $product->created_by = Auth::user()->id;
+
+        $slug = Str::slug($title, '-');
+        $checkSlug = Product::where('slug', $slug)->count();
+        if (empty($checkSlug)) {
+            $product->slug = $slug;
+            // $product->save();
+        } else {
+            $newSlug = $slug . '-' . $product->id;
+            $product->slug = $newSlug;
+            // $product->save();
+        }
+        dd($product);
     }
 
     /**

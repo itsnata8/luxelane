@@ -7,13 +7,13 @@
                 <div class="col-sm-6">
                     <a href="{{ route('categories.index') }}" class="d-flex align-items-center"> <i
                             class="fas fa-long-arrow-alt-left mr-2 text-xs"></i>
-                        Back to Category List
+                        Back to Product List
                     </a>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('categories.index') }}">Category</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('products.index') }}">Product</a></li>
                         <li class="breadcrumb-item active">New</li>
                     </ol>
                 </div>
@@ -26,37 +26,26 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add New Category</h3>
+                            <h3 class="card-title">Add New Product</h3>
                         </div>
                         <!-- /.card-header -->
 
                         <!-- form start -->
-                        <form method="post" action="{{ route('categories.store') }}">
+                        <form method="post" action="{{ route('products.store') }}">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Category Name <span class="text-danger">*</span></label>
+                                    <label for="title">Title <span class="text-danger">*</span></label>
                                     <input type="text"
-                                        class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name"
-                                        id="name" placeholder="Enter category name" value="{{ old('name') }}">
+                                        class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title"
+                                        id="title" placeholder="Enter title" value="{{ old('title') }}">
                                 </div>
-                                @error('name')
+                                @error('title')
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                <div class="form-group">
-                                    <label for="slug">Slug <span class="text-danger">*</span></label>
-                                    <input type="text"
-                                        class="form-control {{ $errors->has('slug') ? 'is-invalid' : '' }}" name="slug"
-                                        id="slug" placeholder="Slug Ex. URL" value="{{ old('slug') }}">
-                                </div>
-                                @error('slug')
-                                    <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="status">Status <span class="text-danger">*</span></label>
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" name="status" id="status">
@@ -98,7 +87,7 @@
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
                                         {{ $message }}
                                     </div>
-                                @enderror
+                                @enderror --}}
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
