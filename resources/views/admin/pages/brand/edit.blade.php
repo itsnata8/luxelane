@@ -26,7 +26,7 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add New Brands</h3>
+                            <h3 class="card-title">Edit Brand</h3>
                         </div>
                         <!-- /.card-header -->
 

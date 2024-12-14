@@ -117,7 +117,7 @@ class BrandController extends Controller
 
         $deleteBrand = $brand->update(['is_delete' => 1]);
         if ($deleteBrand) {
-            return redirect()->route('brands.index')->with('success', 'Category deleted successfully.');
+            return redirect()->route('brands.index')->with('success', 'Brand deleted successfully.');
         } else {
             return redirect()->route('brands.index')->with('error', 'Something went wrong. Please try again.');
         }
