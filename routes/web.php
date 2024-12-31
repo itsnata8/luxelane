@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
@@ -10,7 +10,6 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SubcategoryController;
-use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +22,7 @@ use App\Models\Product;
 |
 */
 
-// Route::view('/login', 'admin.pages.login');
-// Route::view('/register', 'admin.pages.register');
-// Route::view('/dashboard', 'admin.page-example');
+
 
 Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
@@ -50,3 +47,5 @@ Route::prefix('admin')->group(function () {
         Route::post('/register', [AuthController::class, 'handleRegister'])->name('admin.handleRegister');
     });
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
