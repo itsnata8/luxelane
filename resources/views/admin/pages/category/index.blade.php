@@ -16,9 +16,9 @@
             </div>
         </div><!-- /.container-fluid -->
     </section>
-    @include('admin.inc._toast')
     <section class="content">
         <div class="container-fluid">
+            @include('admin.inc._toast')
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">

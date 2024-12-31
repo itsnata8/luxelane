@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
@@ -9,7 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SubcategoryController;
-
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +35,11 @@ Route::prefix('admin')->group(function () {
             Route::resource('categories', CategoryController::class);
             Route::resource('subcategories', SubcategoryController::class);
             Route::resource('products', ProductController::class);
+            Route::get('/products/image/{id}/delete', [ProductController::class, 'deleteImage'])->name('products.destroyImage');
+            Route::post('/product_image_sortable', [ProductController::class, 'product_image_sortable']);
             Route::resource('brands', BrandController::class);
             Route::resource('colors', ColorController::class);
+            Route::post('/get-subcategories', [SubcategoryController::class, 'getSubcategories']);
             Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
         });
     });

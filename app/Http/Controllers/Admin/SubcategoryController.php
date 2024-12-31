@@ -136,4 +136,16 @@ class SubcategoryController extends Controller
             return redirect()->route('subcategories.index')->with('error', 'Something went wrong. Please try again.');
         }
     }
+    public function getSubcategories(Request $request)
+    {
+        $category_id = $request->id;
+        $getSubcategories = Subcategory::where('category_id', $category_id)->where('is_delete', 0)->get();
+        $html = '';
+        $html = '<option value="" disabled selected >Select Subcategory</option>';
+        foreach ($getSubcategories as $subcategory) {
+            $html .= '<option value="' . $subcategory->id . '">' . $subcategory->name . '</option>';
+        }
+        $json['html'] = $html;
+        echo json_encode($json);
+    }
 }

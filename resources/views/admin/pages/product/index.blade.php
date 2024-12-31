@@ -16,9 +16,9 @@
             </div>
         </div><!-- /.container-fluid -->
     </section>
-    @include('admin.inc._toast')
     <section class="content">
         <div class="container-fluid">
+            @include('admin.inc._toast')
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -37,10 +37,6 @@
                                     <tr>
                                         <th style="width: 10px">No</th>
                                         <th>Title</th>
-                                        <th>Slug</th>
-                                        <th>Meta Title</th>
-                                        <th>Meta Description</th>
-                                        <th>Meta Keywords</th>
                                         <th>Created By</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
@@ -48,31 +44,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                        <td><a class="btn btn-link text-primary admin-edit-btn" href="#">Edit</a>
-                                            <form action="#" method="post" class="d-inline"
-                                                onsubmit="return confirm('Are you sure want to delete this category?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="btn btn-link text-danger admin-delete-btn">Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                    @foreach ($products as $product)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $product->title }}</td>
+                                            <td>{{ $product->created_by }}</td>
+                                            <td>{{ $product->status ? 'Active' : 'Inactive' }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
+                                            <td><a class="btn btn-link text-primary admin-edit-btn"
+                                                    href="{{ route('products.edit', $product->id) }}">Edit</a>
+                                                <form action="#" method="post" class="d-inline"
+                                                    onsubmit="return confirm('Are you sure want to delete this category?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="btn btn-link text-danger admin-delete-btn">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <div class="card-footer clearfix">
                                 <div class="pagination pagination-sm m-0 float-right">
-                                    {{-- {{ $categories->links() }} --}}
+                                    {{ $products->links() }}
                                 </div>
                             </div>
                         </div>
