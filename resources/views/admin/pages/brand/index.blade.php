@@ -48,9 +48,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($brands as $brand)
+                                    @foreach ($brands as $key => $brand)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $brands->firstItem() + $key }}</td>
                                             <td>{{ $brand->name }}</td>
                                             <td>{{ $brand->slug }}</td>
                                             <td>{{ $brand->meta_title }}</td>

@@ -58,6 +58,7 @@ class ProductController extends Controller
 
         $slug = Str::slug($title, '-');
         $checkSlug = Product::where('slug', $slug)->count();
+        $saveSlug = false;
         if (empty($checkSlug)) {
             $product->slug = $slug;
             $saveSlug = $product->save();
@@ -66,6 +67,7 @@ class ProductController extends Controller
             $product->slug = $newSlug;
             $saveSlug = $product->save();
         }
+
         if ($saveSlug) {
             return redirect()->route('products.edit', $product->id);
         } else {
@@ -87,12 +89,12 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $product = Product::find($id);
-        $categories = Category::all();
-        $brands = Brand::all();
-        $colors = Color::all();
+        $categories = Category::where('is_delete', 0)->where('status', 1)->get();
+        $brands = Brand::where('is_delete', 0)->where('status', 1)->get();
+        $colors = Color::where('is_delete', 0)->where('status', 1)->get();
         $subcategories = [];
         if ($product->category_id != null) {
-            $subcategories = Category::find($product->category_id)->subcategories()->where('is_delete', 0)->get();
+            $subcategories = Category::find($product->category_id)->subcategories()->get();
         }
         $productImages = $product->images()->count() > 0 ? $product->images()->where('product_id', $id)->orderBy('order_by', 'asc')->get() : [];
 
@@ -103,8 +105,8 @@ class ProductController extends Controller
             'subcategories' => $subcategories,
             'brands' => $brands,
             'colors' => $colors,
-            'productColors' => $product->colors()->where('product_id', $id)->get(),
-            'productSizes' => $product->sizes()->where('product_id', $id)->get(),
+            'productColors' => $product->colors()->where('product_id', $id)->where('is_delete', 0)->where('status', 1)->get(),
+            'productSizes' => $product->sizes()->get(),
             'productImages' => $productImages
         ];
         return view('admin.pages.product.edit', $data);
@@ -132,7 +134,6 @@ class ProductController extends Controller
         ]);
         $product = Product::find($id);
         $product->title = trim($request->title);
-        $product->slug = trim($request->slug);
         $product->sku = trim($request->sku);
         $product->category_id = $request->category;
         $product->sub_category_id = $request->subcategory;
@@ -186,7 +187,11 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::find($id);
+        $product->update([
+            'is_delete' => 1
+        ]);
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 
     public function deleteImage($id)

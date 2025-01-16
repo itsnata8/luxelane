@@ -22,7 +22,7 @@ class Category extends Model
 
     public function getAllCategories()
     {
-        $data = Category::where('is_delete', 0)->paginate(10);
+        $data = Category::where('is_delete', 0)->where('status', 1)->paginate(10);
         return $data;
     }
     public function getCategoryById($id)
@@ -35,6 +35,6 @@ class Category extends Model
     }
     public function subcategories()
     {
-        return $this->hasMany(Subcategory::class, 'category_id');
+        return $this->hasMany(Subcategory::class, 'category_id')->where('subcategories.status', '=', 1)->where('subcategories.is_delete', '=', 0);
     }
 }

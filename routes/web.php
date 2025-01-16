@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\ProductController as ProductFront;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,6 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('search', [ProductFront::class, 'searchProduct']);
+Route::get('/{slug?}/{subslug?}', [ProductFront::class, 'index']);
+Route::post('/get-filtered-products', [ProductFront::class, 'getFilteredProducts']);

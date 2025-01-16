@@ -21,6 +21,10 @@ class Brand extends Model
 
     public function getAllBrands()
     {
-        return Brand::where('is_delete', 0)->paginate(10);
+        return Brand::where('is_delete', 0)->where('status', 1)->paginate(10);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

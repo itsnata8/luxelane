@@ -60,7 +60,8 @@
                                             <label for="sku">SKU <span class="text-danger">*</span></label>
                                             <input type="text"
                                                 class="form-control {{ $errors->has('sku') ? 'is-invalid' : '' }}"
-                                                name="sku" id="sku" placeholder="SKU" value="{{ $product->sku }}">
+                                                name="sku" id="sku" placeholder="SKU"
+                                                value="{{ $product->sku ?? old('sku') }}">
                                         </div>
                                         @error('sku')
                                             <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
@@ -177,7 +178,7 @@
                                             <input type="text"
                                                 class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}"
                                                 name="price" id="price" placeholder="Price"
-                                                value="{{ $product->price }}">
+                                                value="{{ $product->price ?? old('price') }}">
                                         </div>
                                         @error('price')
                                             <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
@@ -192,7 +193,7 @@
                                             <input type="text"
                                                 class="form-control {{ $errors->has('old_price') ? 'is-invalid' : '' }}"
                                                 name="old_price" id="old_price" placeholder="Old Price"
-                                                value="{{ $product->old_price }}">
+                                                value="{{ $product->old_price ?? old('old_price') }}">
                                         </div>
                                         @error('old_price')
                                             <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
@@ -217,12 +218,12 @@
                                                 <tr>
                                                     <td>
                                                         <input type="text" class="form-control" name="size[100][name]"
-                                                            placeholder="Size" required
-                                                            value="{{ $productSizes[0]->name ?? '' }}">
+                                                            placeholder="Size" value="{{ $productSizes[0]->name ?? '' }}"
+                                                            required>
                                                     </td>
                                                     <td><input type="text" class="form-control"
-                                                            name="size[100][price]" placeholder="Price" required
-                                                            value="{{ $productSizes[0]->price ?? '' }}">
+                                                            name="size[100][price]" placeholder="Price"
+                                                            value="{{ $productSizes[0]->price ?? '' }}" required>
                                                     </td>
                                                     <td><button class="btn btn-link text-primary"
                                                             id="AddSizeBtn">Add</button>
@@ -271,6 +272,7 @@
                                                     onclick="return confirm('Are you sure want to delete this image?');">Delete</a>
                                             </div>
                                         @endforeach
+
                                     </div>
                                 @else
                                     <p class="text-danger">No images</p>
@@ -281,7 +283,7 @@
                                             class="text-danger">*</span></label>
                                     <textarea id="summernote_short_description" class="form-control" rows="3" placeholder="Short Description"
                                         style="height: 87px;" class="form-control {{ $errors->has('short_description') ? 'is-invalid' : '' }}"
-                                        name="short_description" id="short_description">{{ $product->short_description }}</textarea>
+                                        name="short_description" id="short_description">{{ $product->short_description ?? old('short_description') }}</textarea>
                                 </div>
                                 @error('short_description')
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
@@ -291,7 +293,7 @@
                                 <div class="form-group">
                                     <label for="description">Description <span class="text-danger">*</span></label>
                                     <textarea id="summernote_description" class="form-control" rows="3" style="height: 87px;"
-                                        class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{{ $product->description }}</textarea>
+                                        class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{{ $product->description ?? old('description') }}</textarea>
                                 </div>
                                 @error('description')
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
@@ -303,7 +305,7 @@
                                             class="text-danger">*</span></label>
                                     <textarea class="form-control" id="summernote_additional_information" rows="3" style="height: 87px;"
                                         class="form-control {{ $errors->has('additional_information') ? 'is-invalid' : '' }}"
-                                        name="additional_information">{{ $product->additional_information }}</textarea>
+                                        name="additional_information">{{ $product->additional_information ?? old('additional_information') }}</textarea>
                                 </div>
                                 @error('additional_information')
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
@@ -314,7 +316,7 @@
                                     <label for="shipping_returns">Shipping Returns <span
                                             class="text-danger">*</span></label>
                                     <textarea class="form-control" id="summernote_shipping_returns" rows="3" style="height: 87px;"
-                                        class="form-control {{ $errors->has('shipping_returns') ? 'is-invalid' : '' }}" name="shipping_returns">{{ $product->shipping_returns }}</textarea>
+                                        class="form-control {{ $errors->has('shipping_returns') ? 'is-invalid' : '' }}" name="shipping_returns">{{ $product->shipping_returns ?? old('shipping_returns') }}</textarea>
                                 </div>
                                 @error('shipping_returns')
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">
@@ -325,7 +327,7 @@
                                     <label for="status">Status <span class="text-danger">*</span></label>
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" name="status"
-                                            id="status">
+                                            id="status" {{ $product->status ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="status">Active</label>
                                     </div>
                                 </div>

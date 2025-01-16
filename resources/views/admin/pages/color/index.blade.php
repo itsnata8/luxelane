@@ -45,9 +45,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($colors as $color)
+                                    @foreach ($colors as $key => $color)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $colors->firstItem() + $key }}</td>
                                             <td>{{ $color->name }}</td>
                                             <td>{{ $color->code }}</td>
                                             <td>{{ $color->created_by }}</td>

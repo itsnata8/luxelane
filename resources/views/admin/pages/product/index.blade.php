@@ -44,16 +44,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $product)
+                                    @foreach ($products as $key => $product)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $products->firstItem() + $key }}</td>
                                             <td>{{ $product->title }}</td>
                                             <td>{{ $product->created_by }}</td>
                                             <td>{{ $product->status ? 'Active' : 'Inactive' }}</td>
                                             <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
                                             <td><a class="btn btn-link text-primary admin-edit-btn"
                                                     href="{{ route('products.edit', $product->id) }}">Edit</a>
-                                                <form action="#" method="post" class="d-inline"
+                                                <form action="{{ route('products.destroy', $product->id) }}" method="post"
+                                                    class="d-inline"
                                                     onsubmit="return confirm('Are you sure want to delete this category?');">
                                                     @csrf
                                                     @method('DELETE')

@@ -8,10 +8,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Molla - Bootstrap eCommerce Template</title>
-    <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="Molla - Bootstrap eCommerce Template">
-    <meta name="author" content="p-themes">
+    <title>{{ $meta_title ?? '' }}</title>
+    <meta name="keywords" content="{{ $meta_keywords ?? '' }}">
+    <meta name="description" content="{{ $meta_description ?? '' }}">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/client/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/client/images/icons/favicon-32x32.png">
@@ -60,13 +59,15 @@
     <script src="/assets/client/js/jquery.waypoints.min.js"></script>
     <script src="/assets/client/js/superfish.min.js"></script>
     <script src="/assets/client/js/owl.carousel.min.js"></script>
+    <script src="/assets/client/js/bootstrap-input-spinner.js"></script>
+    <script src="/assets/client/js/jquery.elevateZoom.min.js"></script>
     <script src="/assets/client/js/jquery.magnific-popup.min.js"></script>
     <!-- Main JS File -->
+    @yield('scripts')
     <script src="/assets/client/js/main.js"></script>
-    @section('scripts')
-    </body>
+</body>
 
 
-    <!-- molla/index-2.html  22 Nov 2019 09:55:42 GMT -->
+<!-- molla/index-2.html  22 Nov 2019 09:55:42 GMT -->
 
-    </html>
+</html>

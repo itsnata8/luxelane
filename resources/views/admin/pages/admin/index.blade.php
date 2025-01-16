@@ -43,9 +43,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($admins as $admin)
+                                    @foreach ($admins as $key => $admin)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $admins->firstItem() + $key }}</td>
                                             <td>{{ $admin->name }}</td>
                                             <td>{{ $admin->email }}</td>
                                             <td>{{ $admin->is_active ? 'Active' : 'Inactive' }}</td>

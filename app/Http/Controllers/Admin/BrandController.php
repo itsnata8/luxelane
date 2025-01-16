@@ -16,6 +16,9 @@ class BrandController extends Controller
     {
         $brand = new Brand();
         $brands = $brand->getAllBrands();
+        foreach ($brands as $brand) {
+            $brand->created_by = $brand->user->name;
+        }
         $data = [
             'pageTitle' => 'Admin | Brand',
             'brands' => $brands

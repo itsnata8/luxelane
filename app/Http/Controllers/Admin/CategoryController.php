@@ -118,7 +118,7 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         $category = Category::find($id);
-        $hasSubcategory = $category->subcategories()->where('category_id', $id)->count();
+        $hasSubcategory = $category->subcategories()->where('category_id', $id)->where('is_delete', 0)->count();
         if ($hasSubcategory > 0) {
             return redirect()->route('categories.index')->with('error', 'Category has subcategories. Please delete subcategories first.');
         } else {

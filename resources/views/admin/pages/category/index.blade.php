@@ -48,9 +48,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $category)
+                                    @foreach ($categories as $key => $category)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $categories->firstItem() + $key }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>{{ $category->slug }}</td>
                                             <td>{{ $category->meta_title }}</td>

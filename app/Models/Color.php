@@ -19,7 +19,7 @@ class Color extends Model
 
     public function getAllColors()
     {
-        return Color::where('is_delete', 0)->paginate(10);
+        return Color::where('is_delete', 0)->where('status', 1)->paginate(10);
     }
     public function user()
     {
