@@ -13,7 +13,6 @@
             <ul class="mobile-menu">
                 <li class="active">
                     <a href="index.html">Home</a>
-
                 </li>
                 @php
                     $categories = App\Models\Category::all();

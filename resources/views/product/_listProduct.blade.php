@@ -15,13 +15,7 @@
                         <div class="product-action-vertical">
                             <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to
                                     wishlist</span></a>
-
                         </div><!-- End .product-action-vertical -->
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to
-                                    cart</span></a>
-                        </div><!-- End .product-action -->
                     </figure><!-- End .product-media -->
 
                     <div class="product-body">

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
@@ -50,6 +51,11 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('checkout', [PaymentController::class, 'checkout']);
+Route::post('update_cart', [PaymentController::class, 'updateCart']);
+Route::get('/cart/delete/{id}', [PaymentController::class, 'deleteCart']);
+Route::get('cart', [PaymentController::class, 'cart']);
+Route::post('product/add-to-cart', [PaymentController::class, 'add_to_cart']);
 Route::get('search', [ProductFront::class, 'searchProduct']);
 Route::get('/{slug?}/{subslug?}', [ProductFront::class, 'index']);
 Route::post('/get-filtered-products', [ProductFront::class, 'getFilteredProducts']);

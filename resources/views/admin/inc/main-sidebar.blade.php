@@ -86,6 +86,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a href="#" class="nav-link {{ Request::segment(2) === 'discount-codes' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-percent"></i>
+                        <p>
+                            Discount Codes
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.logout') }}" class="nav-link">
                         <i class=" fas fa-sign-out-alt nav-icon"></i>

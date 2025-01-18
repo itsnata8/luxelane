@@ -73,56 +73,55 @@
                                 <div class="product-content">
                                     {!! $product->short_description !!}
                                 </div><!-- End .product-content -->
+                                <form method="post" action="{{ url('/product/add-to-cart') }}">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <div class="details-filter-row details-row-size">
+                                        <label for="color">Color:</label>
+                                        <div class="select-custom">
+                                            <select name="color_id" id="color" class="form-control" required>
+                                                <option value="" selected disabled>Select a color</option>
+                                                @foreach ($product->colors as $productColor)
+                                                    <option value="{{ $productColor->id }}">{{ $productColor->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div><!-- End .select-custom -->
+                                    </div><!-- End .details-filter-row -->
 
-                                <div class="details-filter-row details-row-size">
-                                    <label for="color">Color:</label>
-                                    <div class="select-custom">
-                                        <select name="color" id="color" class="form-control">
-                                            <option value="" selected disabled>Select a color</option>
-                                            @foreach ($product->colors as $productColor)
-                                                <option value="{{ $productColor->id }}">{{ $productColor->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div><!-- End .select-custom -->
-                                </div><!-- End .details-filter-row -->
-
-                                <div class="details-filter-row details-row-size">
-                                    <label for="size">Size:</label>
-                                    <div class="select-custom">
-                                        <select name="size" id="size" class="form-control getSizePrice">
-                                            <option data-price="0" value="" selected="selected" disabled>Select a size
-                                            </option>
-                                            @foreach ($product->sizes as $productSize)
-                                                <option value="{{ $productSize->id }}"
-                                                    data-price="{{ $productSize->price }}" class="text-capitalize">
-                                                    {{ $productSize->name }}
-                                                    (${{ number_format($productSize->price, 2) }})
+                                    <div class="details-filter-row details-row-size">
+                                        <label for="size">Size:</label>
+                                        <div class="select-custom">
+                                            <select name="size_id" id="size" class="form-control getSizePrice"
+                                                required>
+                                                <option data-price="0" value="" selected="selected" disabled>Select a
+                                                    size
                                                 </option>
-                                            @endforeach
-                                        </select>
-                                    </div><!-- End .select-custom -->
-                                </div><!-- End .details-filter-row -->
+                                                @foreach ($product->sizes as $productSize)
+                                                    <option value="{{ $productSize->id }}"
+                                                        data-price="{{ $productSize->price }}" class="text-capitalize">
+                                                        {{ $productSize->name }}
+                                                        (${{ number_format($productSize->price, 2) }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div><!-- End .select-custom -->
+                                    </div><!-- End .details-filter-row -->
 
-                                <div class="details-filter-row details-row-size">
-                                    <label for="qty">Qty:</label>
-                                    <div class="product-details-quantity">
-                                        <input type="number" id="qty" class="form-control" value="1"
-                                            min="1" max="10" step="1" data-decimals="0" required=""
-                                            style="display: none;">
-                                    </div><!-- End .product-details-quantity -->
-                                </div><!-- End .details-filter-row -->
+                                    <div class="details-filter-row details-row-size">
+                                        <label for="qty">Qty:</label>
+                                        <div class="product-details-quantity">
+                                            <input type="number" name="qty" id="qty" class="form-control"
+                                                value="1" min="1" max="10" step="1"
+                                                data-decimals="0" required="">
+                                        </div><!-- End .product-details-quantity -->
+                                    </div><!-- End .details-filter-row -->
 
-                                <div class="product-details-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-
-                                    <div class="details-action-wrapper">
-                                        <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to
-                                                Wishlist</span></a>
-                                        <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to
-                                                Compare</span></a>
-                                    </div><!-- End .details-action-wrapper -->
-                                </div><!-- End .product-details-action -->
-
+                                    <div class="product-details-action">
+                                        <button type="submit" class="btn btn-product btn-cart"><span>add to
+                                                cart</span></button>
+                                    </div><!-- End .product-details-action -->
+                                </form>
                                 <div class="product-details-footer">
                                     <div class="product-cat">
                                         <span>Category:</span>
