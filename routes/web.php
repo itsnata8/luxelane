@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\DiscountCodeController;
 use App\Http\Controllers\ProductController as ProductFront;
 
 /*
@@ -39,6 +40,7 @@ Route::prefix('admin')->group(function () {
             Route::resource('brands', BrandController::class);
             Route::resource('colors', ColorController::class);
             Route::post('/get-subcategories', [SubcategoryController::class, 'getSubcategories']);
+            Route::resource('discount-codes', DiscountCodeController::class);
             Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
         });
     });

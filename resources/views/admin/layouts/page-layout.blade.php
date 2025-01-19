@@ -17,6 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="/assets/admin/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
+    <link rel="stylesheet" href="/assets/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="/assets/admin/dist/css/adminlte.min.css">
     @yield('stylesheets')
 </head>
@@ -52,6 +53,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="/assets/admin/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="/assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/admin/plugins/moment/moment.min.js"></script>
+    <script src="/assets/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/assets/admin/dist/js/adminlte.min.js"></script>
     @yield('scripts')

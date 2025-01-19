@@ -87,10 +87,11 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a href="#" class="nav-link {{ Request::segment(2) === 'discount-codes' ? 'active' : '' }}">
+                    <a href="{{ route('discount-codes.index') }}"
+                        class="nav-link {{ Request::segment(2) === 'discount-codes' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-percent"></i>
                         <p>
-                            Discount Codes
+                            Discount Coupon
                         </p>
                     </a>
                 </li>
