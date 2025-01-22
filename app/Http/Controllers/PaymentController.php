@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DiscountCode;
 use App\Models\Product;
 use App\Models\ProductSize;
 use Illuminate\Http\Request;
@@ -62,5 +63,30 @@ class PaymentController extends Controller
         }
 
         return view('payment.checkout', $data);
+    }
+    public function applyDiscountCode(Request $request)
+    {
+        $getDiscount = DiscountCode::where('name', $request->discount_code)->where('expire_date', '>=', date('m-d-Y'))->where('status', 1)->where('is_delete', 0)->first();
+
+        if (!empty($getDiscount)) {
+            $total = CartFacade::getSubTotal();
+            if ($getDiscount->type == 'amount') {
+                $discount_amount = $getDiscount->percent_amount;
+                $payable_total = $total - $getDiscount->percent_amount;
+            } else {
+                $discount_amount = ($total * $getDiscount->percent_amount) / 100;
+                $payable_total = $total - $discount_amount;
+            }
+            $json['status'] = true;
+            $json['discount_amount'] = number_format($discount_amount, 2);
+            $json['payable_total'] = number_format($payable_total, 2);
+            $json['message'] = 'Discount code applied successfully';
+        } else {
+            $json['status'] = false;
+            $json['discount_amount'] = '0.00';
+            $json['payable_total'] = number_format(CartFacade::getSubTotal(), 2);
+            $json['message'] = 'Invalid discount code';
+        }
+        echo json_encode($json);
     }
 }

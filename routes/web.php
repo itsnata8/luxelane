@@ -54,6 +54,7 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('checkout', [PaymentController::class, 'checkout']);
+Route::post('checkout/apply-discount-code', [PaymentController::class, 'applyDiscountCode']);
 Route::post('update_cart', [PaymentController::class, 'updateCart']);
 Route::get('/cart/delete/{id}', [PaymentController::class, 'deleteCart']);
 Route::get('cart', [PaymentController::class, 'cart']);
