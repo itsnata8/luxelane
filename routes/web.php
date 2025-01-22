@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\DiscountCodeController;
@@ -39,6 +40,7 @@ Route::prefix('admin')->group(function () {
             Route::post('/product_image_sortable', [ProductController::class, 'product_image_sortable']);
             Route::resource('brands', BrandController::class);
             Route::resource('colors', ColorController::class);
+            Route::resource('shipping', ShippingController::class);
             Route::post('/get-subcategories', [SubcategoryController::class, 'getSubcategories']);
             Route::resource('discount-codes', DiscountCodeController::class);
             Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');

@@ -39,7 +39,7 @@
                                     <label for="name">Discount Coupon Name <span class="text-danger">*</span></label>
                                     <input type="text"
                                         class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name"
-                                        id="name" placeholder="Enter category name" value="{{ old('name') }}">
+                                        id="name" placeholder="Enter discount coupon name" value="{{ old('name') }}">
                                 </div>
                                 @error('name')
                                     <div class="text-danger" style="margin-top: -15px; margin-bottom: 10px">

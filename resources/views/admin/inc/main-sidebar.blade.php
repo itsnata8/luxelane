@@ -95,6 +95,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a href="{{ route('shipping.index') }}"
+                        class="nav-link {{ Request::segment(2) === 'shipping' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-truck"></i>
+                        <p>
+                            Shipping
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.logout') }}" class="nav-link">
                         <i class=" fas fa-sign-out-alt nav-icon"></i>
