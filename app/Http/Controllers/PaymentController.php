@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DiscountCode;
 use App\Models\Product;
 use App\Models\ProductSize;
+use App\Models\ShippingCharge;
 use Illuminate\Http\Request;
 use Darryldecode\Cart\Facades\CartFacade;
 
@@ -61,6 +62,7 @@ class PaymentController extends Controller
         foreach ($data['products'] as $product) {
             $product->productDetail = Product::find($product->id);
         }
+        $data['shippingCharges'] = ShippingCharge::where('status', 1)->where('is_delete', 0)->get();
 
         return view('payment.checkout', $data);
     }
@@ -78,13 +80,13 @@ class PaymentController extends Controller
                 $payable_total = $total - $discount_amount;
             }
             $json['status'] = true;
-            $json['discount_amount'] = number_format($discount_amount, 2);
-            $json['payable_total'] = number_format($payable_total, 2);
+            $json['discount_amount'] = $discount_amount;
+            $json['payable_total'] = $payable_total;
             $json['message'] = 'Discount code applied successfully';
         } else {
             $json['status'] = false;
             $json['discount_amount'] = '0.00';
-            $json['payable_total'] = number_format(CartFacade::getSubTotal(), 2);
+            $json['payable_total'] = CartFacade::getSubTotal();
             $json['message'] = 'Invalid discount code';
         }
         echo json_encode($json);

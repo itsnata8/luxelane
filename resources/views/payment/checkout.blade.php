@@ -101,7 +101,6 @@
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             @foreach ($products as $key => $product)
                                                 <tr>
@@ -109,11 +108,11 @@
                                                     <td>${{ number_format($product->price * $product->quantity, 2) }}</td>
                                                 </tr>
                                             @endforeach
-
-
                                             <tr class="summary-subtotal">
                                                 <td>Subtotal:</td>
-                                                <td>${{ number_format(Darryldecode\Cart\Facades\CartFacade::getSubTotal(), 2) }}
+                                                <td>$
+                                                    <span id="getSubTotal"
+                                                        data-price="Darryldecode\Cart\Facades\CartFacade::getSubTotal()">{{ number_format(Darryldecode\Cart\Facades\CartFacade::getSubTotal(), 2) }}</span>
                                                 </td>
                                             </tr><!-- End .summary-subtotal -->
                                             <tr>
@@ -135,16 +134,32 @@
                                             </tr>
                                             <tr>
                                                 <td>Discount:</td>
-                                                <td> $<span id="getDiscount">0.00</span></td>
+                                                <td> $<span id="getDiscount" data-discount="0">0.00</span></td>
                                             </tr>
-                                            <tr>
+                                            <tr class="summary-shipping">
                                                 <td>Shipping:</td>
-                                                <td>Free shipping</td>
+                                                <td>&nbsp;</td>
                                             </tr>
+                                            @foreach ($shippingCharges as $key => $item)
+                                                <tr class="summary-shipping-row">
+                                                    <td>
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" id="shipping-{{ $key }}"
+                                                                name="shipping"
+                                                                class="custom-control-input shippingCharges"
+                                                                data-price="{{ $item->price }}"
+                                                                value="{{ $item->price }}">
+                                                            <label class="custom-control-label"
+                                                                for="shipping-{{ $key }}">{{ $item->name }}</label>
+                                                        </div><!-- End .custom-control -->
+                                                    </td>
+                                                    <td>${{ number_format($item->price, 2) }}</td>
+                                                </tr><!-- End .summary-shipping-row -->
+                                            @endforeach
                                             <tr class="summary-total">
                                                 <td>Total:</td>
                                                 <td>$<span
-                                                        id="getTotal">{{ number_format(Darryldecode\Cart\Facades\CartFacade::getTotal(), 2) }}</span>
+                                                        id="getTotal">{{ number_format(Darryldecode\Cart\Facades\CartFacade::getSubTotal(), 2) }}</span>
                                                 </td>
                                             </tr><!-- End .summary-total -->
                                         </tbody>
@@ -213,6 +228,10 @@
                                         </div><!-- End .card -->
                                     </div>
 
+                                    <input type="hidden" id="shippingCharge" name="shippingCharge" value="0">
+                                    <input type="hidden" id="grandTotal" name="grandTotal"
+                                        value="{{ Darryldecode\Cart\Facades\CartFacade::getSubTotal() }}">
+
                                     <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
                                         <span class="btn-text">Place Order</span>
                                         <span class="btn-hover-text">Proceed to Checkout</span>
@@ -242,8 +261,14 @@
                 dataType: 'json',
                 success: function(data) {
                     if (data.status) {
-                        $('#getDiscount').html(data.discount_amount);
-                        $('#getTotal').html(data.payable_total);
+                        $('#getDiscount').html(parseFloat(data.discount_amount).toFixed(2));
+                        $('#getDiscount').attr('data-discount', data.discount_amount);
+                        var shippingCharge = $('#shippingCharge').val();
+
+
+                        var finalPrice = parseFloat(data.payable_total) + parseFloat(shippingCharge);
+                        $('#getTotal').html(finalPrice.toFixed(2));
+                        $('#grandTotal').val(finalPrice);
                     } else {
                         alert(data.message);
                     }
@@ -252,6 +277,17 @@
 
                 }
             })
+
+        })
+        $('body').delegate('.shippingCharges', 'change', function(e) {
+            e.preventDefault();
+            var shippingCharge = $('input[name="shipping"]:checked').val();
+            var price = $('#getSubTotal').html();
+            var discountAmount = $('#getDiscount').attr('data-discount');
+            var finalPrice = (parseFloat(price) - parseFloat(discountAmount)) + parseFloat(shippingCharge);
+
+            $('#shippingCharge').val(shippingCharge);
+            $('#grandTotal').val(finalPrice);
 
         })
     </script>

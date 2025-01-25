@@ -40,7 +40,8 @@ class ShippingController extends Controller
 
         $newShippingCharge = ShippingCharge::create([
             'name' => $request->name,
-            'price' => $request->price
+            'price' => $request->price,
+            'status' => $request->status == 'on' ? 1 : 0
         ]);
 
         if ($newShippingCharge) {
@@ -78,11 +79,13 @@ class ShippingController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
+
         ]);
 
         $updateShippingCharge = ShippingCharge::find($id)->update([
             'name' => $request->name,
-            'price' => $request->price
+            'price' => $request->price,
+            'status' => $request->status == 'on' ? 1 : 0
         ]);
 
         if ($updateShippingCharge) {
