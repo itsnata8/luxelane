@@ -55,6 +55,9 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('auth-register', [AuthController::class, 'authRegister']);
+Route::get('activate/{id}', [AuthController::class, 'activate_email']);
+
 Route::get('checkout', [PaymentController::class, 'checkout']);
 Route::post('checkout/apply-discount-code', [PaymentController::class, 'applyDiscountCode']);
 Route::post('update_cart', [PaymentController::class, 'updateCart']);
