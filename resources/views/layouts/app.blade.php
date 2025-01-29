@@ -73,17 +73,18 @@
                             <div class="tab-content" id="tab-content-5">
                                 <div class="tab-pane fade show active" id="signin" role="tabpanel"
                                     aria-labelledby="signin-tab">
-                                    <form action="#">
+                                    <form id="submitUserFormLogin">
+                                        @csrf
                                         <div class="form-group">
                                             <label for="singin-email">Username or email address *</label>
-                                            <input type="text" class="form-control" id="singin-email"
-                                                name="singin-email" required>
+                                            <input type="text" class="form-control" id="singin-email" name="email"
+                                                required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-group">
                                             <label for="singin-password">Password *</label>
                                             <input type="password" class="form-control" id="singin-password"
-                                                name="singin-password" required>
+                                                name="password" required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-footer">
@@ -94,12 +95,13 @@
 
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input"
-                                                    id="signin-remember">
+                                                    name="is_remember" id="signin-remember">
                                                 <label class="custom-control-label" for="signin-remember">Remember
                                                     Me</label>
                                             </div><!-- End .custom-checkbox -->
 
-                                            <a href="#" class="forgot-link">Forgot Your Password?</a>
+                                            <a href="{{ url('forgot-password') }}" class="forgot-link">Forgot Your
+                                                Password?</a>
                                         </div><!-- End .form-footer -->
                                     </form>
                                 </div><!-- .End .tab-pane -->
@@ -180,12 +182,29 @@
     @yield('scripts')
     <script src="/assets/client/js/main.js"></script>
     <script type="text/javascript">
+        $('body').delegate('#submitUserFormLogin', 'submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{{ url('auth-login') }}",
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function(data) {
+                    if (data.status == true) {
+                        location.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function(data) {}
+            })
+        })
         $('body').delegate('#submitUserFormRegister', 'submit', function(e) {
             e.preventDefault();
             $.ajax({
                 type: "POST",
                 url: "{{ url('auth-register') }}",
-                data: $('#submitUserFormRegister').serialize(),
+                data: $(this).serialize(),
                 dataType: "json",
                 success: function(data) {
                     alert(data.message)

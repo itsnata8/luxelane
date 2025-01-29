@@ -56,6 +56,13 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('auth-register', [AuthController::class, 'authRegister']);
+Route::post('auth-login', [AuthController::class, 'authLogin']);
+
+Route::get('forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('forgot-password', [AuthController::class, 'authForgotPassword']);
+Route::get('reset/{token}', [AuthController::class, 'reset']);
+Route::post('reset/{token}', [AuthController::class, 'authReset']);
+
 Route::get('activate/{id}', [AuthController::class, 'activate_email']);
 
 Route::get('checkout', [PaymentController::class, 'checkout']);

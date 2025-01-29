@@ -34,12 +34,17 @@
                         <a href="#">Links</a>
                         <ul>
                             <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
-                            <li><a href="wishlist.html"><i class="icon-heart-o"></i>My Wishlist
+                            <li><a href="{{ url('whishlist') }}"><i class="icon-heart-o"></i>My Wishlist
                                     <span>(3)</span></a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                            <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a>
-                            </li>
+                            <li><a href="{{ url('about') }}">About Us</a></li>
+                            <li><a href="{{ url('contact') }}">Contact Us</a></li>
+                            @if (!empty(Auth::check()))
+                                <li><a href="{{ url('admin/logout') }}"><i class="icon-user"></i>Logout</a>
+                                </li>
+                            @else
+                                <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                 </ul><!-- End .top-menu -->
@@ -55,7 +60,7 @@
                     <i class="icon-bars"></i>
                 </button>
 
-                <a href="index.html" class="logo">
+                <a href="{{ url('/') }}" class="logo">
                     <img src="/assets/client/images/logo.png" alt="Molla Logo" width="105" height="25">
                 </a>
 
